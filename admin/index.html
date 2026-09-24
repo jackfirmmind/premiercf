@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Website admin | Premier Corporate Finance</title>
+<meta name="theme-color" content="#0E2140">
+<link rel="preload" href="/assets/fonts/bodoni-moda.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/ibm-plex-sans.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/css/site.css">
+<link rel="stylesheet" href="/assets/css/admin.css">
+</head>
+<body class="admin">
+<header class="admin-bar on-dark">
+  <div class="wrap">
+    <a class="brand" href="/" aria-label="Premier Corporate Finance website">
+      <svg class="logo-box" viewBox="0 0 132 64" aria-hidden="true" focusable="false">
+        <defs>
+          <linearGradient id="logo-edge" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#173F80"/>
+            <stop offset=".5" stop-color="#2F63AE"/>
+            <stop offset="1" stop-color="#173F80"/>
+          </linearGradient>
+          <linearGradient id="logo-panel" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stop-color="#D4E1F3"/>
+            <stop offset=".5" stop-color="#F4F8FD"/>
+            <stop offset="1" stop-color="#D4E1F3"/>
+          </linearGradient>
+        </defs>
+        <rect width="132" height="64" fill="url(#logo-edge)"/>
+        <rect x="6" y="6" width="120" height="52" fill="url(#logo-panel)" stroke="#FFFFFF" stroke-width="1"/>
+        <text x="66" y="48" text-anchor="middle" textLength="100" lengthAdjust="spacingAndGlyphs" font-family="Bodoni Moda, Didot, Georgia, serif" font-size="45" font-weight="500" fill="#1F55A2">PREMIER</text>
+      </svg>
+      <span class="brand-sub">Website admin</span>
+    </a>
+    <div class="admin-bar-right" data-signed-in hidden>
+      <button class="btn-text btn-text--light" type="button" data-change-pw>Change password</button>
+      <a class="link" href="/deals/" target="_blank" rel="noopener">View deals page<span class="visually-hidden"> (opens in a new tab)</span></a>
+      <button class="btn btn-line-light" type="button" data-signout>Sign out</button>
+    </div>
+  </div>
+</header>
+<div class="demo-note" data-demo hidden><div class="wrap">Preview mode. This copy is not on the web server, so changes are not saved when you reload.</div></div>
+
+<main id="main" class="admin-main">
+  <!-- Sign in -->
+  <section class="login" data-login hidden aria-labelledby="login-title">
+    <h1 id="login-title">Sign in</h1>
+    <p>Sign in to add and edit deals on the website.</p>
+    <form data-login-form novalidate>
+      <div class="field">
+        <label for="l-pass">Password</label>
+        <input id="l-pass" name="password" type="password" autocomplete="current-password" required>
+      </div>
+      <button class="btn btn-ink" type="submit">Sign in</button>
+      <p class="form-status" role="status" aria-live="polite" data-login-status></p>
+      <p class="hint">Forgotten the password? Contact your website manager.</p>
+    </form>
+    <div class="setup-needed" data-setup-needed hidden>
+      <p><strong>The admin password is not set yet.</strong></p>
+      <p>Your website manager needs to open <a class="link" href="setup.php">the password setup page</a> first.</p>
+    </div>
+  </section>
+
+  <!-- Deals admin -->
+  <div class="wrap" data-app hidden>
+    <div class="admin-head">
+      <div>
+        <h1>Deals</h1>
+        <p>Add a deal below. It appears on the website as soon as you save it.</p>
+      </div>
+    </div>
+
+    <div class="editor">
+      <section class="panel" aria-labelledby="form-title">
+        <h2 id="form-title" data-form-title>Add a new deal</h2>
+        <form data-deal-form novalidate>
+          <input type="hidden" name="deal_id">
+          <fieldset class="form-choices">
+            <legend class="field-legend">Type of deal</legend>
+            <div class="choices">
+              <label><input type="radio" name="type" value="sale" checked> Sale</label>
+              <label><input type="radio" name="type" value="acquisition"> Acquisition</label>
+              <label><input type="radio" name="type" value="mbo"> Management buy-out</label>
+              <label><input type="radio" name="type" value="fundraise"> Funding round</label>
+            </div>
+          </fieldset>
+          <div class="field">
+            <label for="d-business" data-business-label>Business we advised</label>
+            <input id="d-business" name="business" type="text" required maxlength="120" aria-describedby="d-business-err">
+            <p class="err" id="d-business-err">Enter the business name.</p>
+          </div>
+          <div class="field" data-counter-field>
+            <label for="d-counter" data-counter-label>Buyer</label>
+            <input id="d-counter" name="counterparty" type="text" maxlength="120" aria-describedby="d-counter-hint d-counter-err">
+            <p class="hint" id="d-counter-hint" data-counter-hint>The company that bought the business.</p>
+            <p class="err" id="d-counter-err">Enter a name.</p>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="d-sector">Sector</label>
+              <select id="d-sector" name="sector" required></select>
+            </div>
+            <div class="field">
+              <label for="d-year">Year completed <span class="opt">(optional)</span></label>
+              <input id="d-year" name="year" type="text" inputmode="numeric" pattern="(19|20)[0-9]{2}" maxlength="4" aria-describedby="d-year-err">
+              <p class="err" id="d-year-err">Enter a 4-digit year, for example 2026.</p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="field">
+              <label for="d-no">Deal number</label>
+              <input id="d-no" name="no" type="text" inputmode="numeric" pattern="[0-9]{1,4}" required aria-describedby="d-no-hint d-no-err">
+              <p class="hint" id="d-no-hint">Filled in for you. The highest number shows first.</p>
+              <p class="err" id="d-no-err">Enter a number.</p>
+            </div>
+            <div class="field">
+              <span class="field-legend">On the website</span>
+              <label class="check"><input type="checkbox" name="published" checked> Show this deal</label>
+            </div>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-ink" type="submit" data-save>Save deal</button>
+            <button class="btn btn-line" type="button" data-cancel hidden>Cancel editing</button>
+          </div>
+          <p class="form-status" role="status" aria-live="polite" data-form-status></p>
+        </form>
+      </section>
+
+      <aside class="preview" aria-label="Preview">
+        <p class="preview-label">Preview</p>
+        <div data-preview></div>
+        <p class="preview-note">This is how the deal will look on the website.</p>
+      </aside>
+    </div>
+
+    <section class="panel list-panel" aria-labelledby="list-title">
+      <div class="list-top">
+        <h2 id="list-title">All deals <span data-total></span></h2>
+        <label class="visually-hidden" for="a-search">Search deals</label>
+        <input id="a-search" type="search" placeholder="Search deals" data-search>
+      </div>
+      <table class="admin-table">
+        <caption class="visually-hidden">All deals</caption>
+        <thead><tr><th scope="col">No.</th><th scope="col">Business</th><th scope="col">Outcome</th><th scope="col">Status</th><th scope="col"><span class="visually-hidden">Actions</span></th></tr></thead>
+        <tbody data-rows></tbody>
+      </table>
+    </section>
+  </div>
+</main>
+
+<dialog class="confirm" data-confirm aria-labelledby="confirm-title">
+  <h2 id="confirm-title">Delete this deal?</h2>
+  <p data-confirm-text></p>
+  <div class="form-actions">
+    <button class="btn btn-line" type="button" data-confirm-no>Keep it</button>
+    <button class="btn btn-danger" type="button" data-confirm-yes>Delete deal</button>
+  </div>
+</dialog>
+<dialog class="confirm" data-pw-dialog aria-labelledby="pw-title">
+  <h2 id="pw-title">Change password</h2>
+  <form data-pw-form novalidate>
+    <div class="field">
+      <label for="p-cur">Current password</label>
+      <input id="p-cur" name="current" type="password" autocomplete="current-password" required>
+    </div>
+    <div class="field">
+      <label for="p-new">New password</label>
+      <input id="p-new" name="new" type="password" autocomplete="new-password" minlength="10" required aria-describedby="p-new-hint">
+      <p class="hint" id="p-new-hint">At least 10 characters.</p>
+    </div>
+    <p class="form-status" role="status" aria-live="polite" data-pw-status></p>
+    <div class="form-actions">
+      <button class="btn btn-line" type="button" data-pw-cancel>Cancel</button>
+      <button class="btn btn-ink" type="submit">Save new password</button>
+    </div>
+  </form>
+</dialog>
+<div class="toast" role="status" aria-live="polite" data-toast hidden></div>
+
+<script type="application/json" id="deals-data">
+[
+  {"no": 1, "business": "Silverdell", "counterparty": "Marwyn", "type": "sale", "sector": "env"},
+  {"no": 2, "business": "Kitsons", "counterparty": "Silverdell", "type": "sale", "sector": "env"},
+  {"no": 3, "business": "Mansell", "counterparty": "Balfour Beatty", "type": "sale", "sector": "construction"},
+  {"no": 4, "business": "Gordon Durham", "counterparty": "Vinci plc", "type": "sale", "sector": "construction"},
+  {"no": 5, "business": "Allied Mechanical", "counterparty": "Keller", "type": "sale", "sector": "construction"},
+  {"no": 6, "business": "John Kay", "counterparty": "DBS Group", "type": "sale", "sector": "fm"},
+  {"no": 7, "business": "Sames Holdings", "counterparty": "M.I.C.E. plc", "type": "sale", "sector": "fm"},
+  {"no": 8, "business": "ACR Heat Transfer", "counterparty": null, "type": "mbo", "sector": "mfg"},
+  {"no": 9, "business": "Birdsall", "counterparty": null, "type": "mbo", "sector": "fm"},
+  {"no": 10, "business": "Leay", "counterparty": null, "type": "mbo", "sector": "construction"},
+  {"no": 11, "business": "Nationwide Maintenance", "counterparty": null, "type": "mbo", "sector": "fm"},
+  {"no": 12, "business": "Tynedale Group", "counterparty": null, "type": "mbo", "sector": "construction"},
+  {"no": 13, "business": "Catalyst Environmental", "counterparty": "Exova", "type": "sale", "sector": "env"},
+  {"no": 14, "business": "Environmental Evaluation", "counterparty": "Exova", "type": "sale", "sector": "env"},
+  {"no": 15, "business": "Western Technical Services", "counterparty": "Exova", "type": "sale", "sector": "tic"},
+  {"no": 16, "business": "MIS Environmental", "counterparty": "SGS", "type": "sale", "sector": "env"},
+  {"no": 17, "business": "MIS Testing", "counterparty": "SGS", "type": "sale", "sector": "tic"},
+  {"no": 18, "business": "Caltech Environmental", "counterparty": "Veolia", "type": "sale", "sector": "env"},
+  {"no": 19, "business": "Henley Water", "counterparty": "SOCOTEC", "type": "sale", "sector": "env"},
+  {"no": 20, "business": "IWJS", "counterparty": "Adler and Allan", "type": "sale", "sector": "env"},
+  {"no": 21, "business": "Hall Analytical Laboratories", "counterparty": "Crawford Scientific", "type": "sale", "sector": "life"},
+  {"no": 22, "business": "NDT Services", "counterparty": "Intertek", "type": "sale", "sector": "ndt"},
+  {"no": 23, "business": "Focus NDT", "counterparty": "Mistras Group", "type": "sale", "sector": "ndt"},
+  {"no": 24, "business": "Insight NDT", "counterparty": "Exova", "type": "sale", "sector": "ndt"},
+  {"no": 25, "business": "Applied Inspection", "counterparty": "Rockwood", "type": "sale", "sector": "tic"},
+  {"no": 26, "business": "CLYZ Labs", "counterparty": "Catapult Ventures", "type": "fundraise", "sector": "life"},
+  {"no": 27, "business": "Technical Inspection Services UK", "counterparty": "Applus+", "type": "sale", "sector": "ndt"},
+  {"no": 28, "business": "PCMS Engineering", "counterparty": "Vibrotech Reliability Services", "type": "acquisition", "sector": "tic"},
+  {"no": 29, "business": "Enitial", "counterparty": "Cawood Scientific", "type": "sale", "sector": "env"},
+  {"no": 30, "business": "Professional Soils Laboratory", "counterparty": "Phenna Group", "type": "sale", "sector": "tic"},
+  {"no": 31, "business": "ACS Group", "counterparty": "Phenna Group", "type": "sale", "sector": "tic"},
+  {"no": 32, "business": "PCMS Engineering Group", "counterparty": "British Engineering Services", "type": "sale", "sector": "tic"},
+  {"no": 33, "business": "Elmhurst Energy", "counterparty": "Phenna Group", "type": "sale", "sector": "tic"},
+  {"no": 34, "business": "Precision Analysis", "counterparty": "Tentamus", "type": "sale", "sector": "tic"},
+  {"no": 35, "business": "UKTC", "counterparty": "SOCOTEC", "type": "sale", "sector": "tic"},
+  {"no": 36, "business": "GO! Permits", "counterparty": "Certek", "type": "sale", "sector": "tic"},
+  {"no": 37, "business": "Aitken", "counterparty": "Celnor", "type": "sale", "sector": "tic"},
+  {"no": 38, "business": "Uni-Safe Access", "counterparty": "Celnor", "type": "sale", "sector": "tic"},
+  {"no": 39, "business": "Corporate Access", "counterparty": "Phenna Group", "type": "sale", "sector": "tic"},
+  {"no": 40, "business": "CHPK Group", "counterparty": "Celnor", "type": "sale", "sector": "tic"},
+  {"no": 41, "business": "Evolution", "counterparty": "Phenna Group", "type": "sale", "sector": "tic"},
+  {"no": 42, "business": "HBE UK", "counterparty": "Celnor", "type": "sale", "sector": "env"},
+  {"no": 43, "business": "Cenelec Standards Inspections", "counterparty": "Certek", "type": "sale", "sector": "tic"},
+  {"no": 44, "business": "Industrial Safety Inspections", "counterparty": "Phenna Group", "type": "sale", "sector": "tic"},
+  {"no": 45, "business": "TelLab", "counterparty": "Celnor", "type": "sale", "sector": "env"},
+  {"no": 46, "business": "APEC Environmental", "counterparty": "Celnor", "type": "sale", "sector": "env"},
+  {"no": 47, "business": "Sayvol", "counterparty": "Phenna Group", "type": "sale", "sector": "env"},
+  {"no": 48, "business": "Vision", "counterparty": "Celnor", "type": "sale", "sector": "tic"},
+  {"no": 49, "business": "Scaled Solutions", "counterparty": "Celnor", "type": "sale", "sector": "env"},
+  {"no": 50, "business": "ECAS", "counterparty": "Phenna Group", "type": "sale", "sector": "env"},
+  {"no": 51, "business": "MC Plan & Site Services", "counterparty": "Celnor", "type": "sale", "sector": "construction"},
+  {"no": 52, "business": "JHAI", "counterparty": "Phenna Group", "type": "sale", "sector": "env"},
+  {"no": 53, "business": "Hydrop", "counterparty": "Celnor", "type": "sale", "sector": "env"},
+  {"no": 54, "business": "Jordan Environmental", "counterparty": "SGI", "type": "sale", "sector": "env"},
+  {"no": 55, "business": "Riverside Environmental", "counterparty": "Celnor", "type": "sale", "sector": "env"},
+  {"no": 56, "business": "MSS", "counterparty": "Celnor", "type": "sale", "sector": "tic"},
+  {"no": 57, "business": "Galson Sciences", "counterparty": "Egis", "type": "sale", "sector": "env"},
+  {"no": 58, "business": "A F Howland Associates", "counterparty": "Celnor", "type": "sale", "sector": "tic"},
+  {"no": 59, "business": "Identity Experts", "counterparty": "Performanta", "type": "sale", "sector": "other"},
+  {"no": 60, "business": "Assurity Consulting", "counterparty": "Celnor", "type": "sale", "sector": "env"},
+  {"no": 61, "business": "ECL", "counterparty": "Celnor", "type": "sale", "sector": "env"}
+]
+</script>
+<script src="/assets/js/config.js"></script>
+<script src="/assets/js/site.js"></script>
+<script src="/assets/js/admin.js"></script>
+</body>
+</html>
