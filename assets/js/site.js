@@ -335,7 +335,7 @@ function drawRosettes(root){
     }
     if (form.action.includes("YOUR_FORM_ID")) {
       status.dataset.state = "error";
-      status.textContent = "The form is not connected yet. Call 01727 851483 or email brendan@premiercf.co.uk.";
+      status.textContent = "The form is not connected yet. Call 07768 936886 or email brendan@premiercf.co.uk.";
       return;
     }
     btn.disabled = true; btn.textContent = "Sending…";
@@ -348,7 +348,7 @@ function drawRosettes(root){
       btn.textContent = "Request sent";
     } catch {
       status.dataset.state = "error";
-      status.textContent = "The request did not send. Call 01727 851483 or email brendan@premiercf.co.uk.";
+      status.textContent = "The request did not send. Call 07768 936886 or email brendan@premiercf.co.uk.";
       btn.disabled = false; btn.textContent = "Request a valuation call";
     }
   });
