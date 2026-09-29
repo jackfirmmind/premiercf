@@ -81,16 +81,13 @@ function drawRosettes(root){
   const card = (d, i) => `
     <article class="tomb${i === 0 ? " tomb--latest" : ""}" aria-label="Deal ${pad(d.no)}: ${esc(d.business)}">
       <div class="tomb-frame">
-        <svg class="band" data-band="8" viewBox="0 0 600 22" preserveAspectRatio="none" aria-hidden="true" focusable="false"></svg>
         <div class="tomb-top"><span>No. ${pad(d.no)}</span><span>${TYPE[d.type] || ""}${d.year ? ", " + esc(d.year) : ""}</span></div>
-        ${i === 0 ? sealSvg() : ""}
         <div class="tomb-parties">
           <p class="tomb-party">${esc(d.business)}</p>
           <p class="tomb-verb">${verbFor(d)}</p>
           ${d.counterparty && d.type !== "mbo" ? `<p class="tomb-party">${esc(d.counterparty)}</p>` : ""}
         </div>
         <p class="tomb-meta">${esc(SECTORS[d.sector] || "")}<span>${ROLE[d.type] || ""}</span></p>
-        <svg class="band" data-band="8" viewBox="0 0 600 22" preserveAspectRatio="none" aria-hidden="true" focusable="false"></svg>
       </div>
     </article>`;
   window.PremierCard = { card, SECTORS, TYPE, ROLE, pad, esc, outcomeOf };
